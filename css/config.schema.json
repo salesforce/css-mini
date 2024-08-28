@@ -1,0 +1,166 @@
+{
+  "$defs": {
+    "ComponentConfigModel": {
+      "additionalProperties": false,
+      "description": "Configuration model for Components.\n\nDefaults to ``Component`` defined in ``css.score``.",
+      "properties": {
+        "type_config_name": {
+          "default": "weightedcomponent",
+          "description": "The config name of the component to create. This is not required and is used only for custom components.",
+          "title": "Type Config Name",
+          "type": "string"
+        },
+        "kwargs": {
+          "description": "Keyword arguments to pass to the scoring object.",
+          "title": "Kwargs",
+          "type": "object"
+        },
+        "metrics": {
+          "description": "The metrics to include in this component. Metrics can only be in one component.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Metrics",
+          "type": "array"
+        },
+        "weights": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Weights for metrics. Must match `metrics` in length. Defaults to dynamic weight creation.",
+          "title": "Weights"
+        }
+      },
+      "required": [
+        "metrics"
+      ],
+      "title": "ComponentConfigModel",
+      "type": "object"
+    },
+    "GlobalScoreConfigModel": {
+      "additionalProperties": false,
+      "description": "Configuration model for GlobalScore.\n\nDefaults to ``GlobalScore`` defined in ``css.score``.",
+      "properties": {
+        "type_config_name": {
+          "default": "weightedglobal",
+          "description": "The config name of the global score to create. This is not required and is used only for custom scoring groupings.",
+          "title": "Type Config Name",
+          "type": "string"
+        },
+        "kwargs": {
+          "description": "Keyword arguments to pass to the scoring object.",
+          "title": "Kwargs",
+          "type": "object"
+        },
+        "weights": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Weights for components. Must match number of components in length. Defaults to equal weighting.",
+          "title": "Weights"
+        }
+      },
+      "title": "GlobalScoreConfigModel",
+      "type": "object"
+    },
+    "MetricConfigModel": {
+      "additionalProperties": false,
+      "description": "Configuration model for Metrics.\n\nUnlike others, ``type_config_name`` must be passed; there is no default value.",
+      "properties": {
+        "type_config_name": {
+          "description": "The config name of the object to create. For metrics, this would might be 'ipmnormal'. For custom classes, you can assign a name to a class variable `CONFIG_NAME` and reference it here.",
+          "title": "Type Config Name",
+          "type": "string"
+        },
+        "kwargs": {
+          "description": "Keyword arguments to pass to the scoring object.",
+          "title": "Kwargs",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type_config_name"
+      ],
+      "title": "MetricConfigModel",
+      "type": "object"
+    },
+    "ScoringScaleConfigModel": {
+      "additionalProperties": false,
+      "description": "Configuration model for ScoringScale.",
+      "properties": {
+        "type_config_name": {
+          "default": "outof10",
+          "description": "The config name of the scoring scale to use. This is not required and is used only for custom scoring scales.",
+          "title": "Type Config Name",
+          "type": "string"
+        },
+        "kwargs": {
+          "description": "Keyword arguments to pass to the scoring object.",
+          "title": "Kwargs",
+          "type": "object"
+        }
+      },
+      "title": "ScoringScaleConfigModel",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Configuration model for the scoring system.",
+  "properties": {
+    "metrics": {
+      "additionalProperties": {
+        "$ref": "#/$defs/MetricConfigModel"
+      },
+      "description": "Mapping of metric names to metric configurations.",
+      "title": "Metrics",
+      "type": "object"
+    },
+    "components": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ComponentConfigModel"
+      },
+      "description": "Mapping of component names to component configurations.",
+      "title": "Components",
+      "type": "object"
+    },
+    "global_score": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/GlobalScoreConfigModel"
+        }
+      ],
+      "description": "Configuration for the global score. Not required, but this is useful for custom weighting of components."
+    },
+    "scoring_scale": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ScoringScaleConfigModel"
+        }
+      ],
+      "description": "Configuration for the scoring scale. Not required."
+    }
+  },
+  "required": [
+    "metrics"
+  ],
+  "title": "ConfigModel",
+  "type": "object"
+}

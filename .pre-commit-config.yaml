@@ -1,0 +1,85 @@
+minimum_pre_commit_version: 2.9.2
+repos:
+- repo: https://github.com/psf/black
+  rev: 24.4.2
+  hooks:
+  - id: black
+  - id: black-jupyter
+    entry: black
+    minimum_pre_commit_version: 2.9.2
+    require_serial: true
+    types_or: [python, pyi, jupyter]
+    additional_dependencies: ['.[jupyter]']
+
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.2.6
+  hooks:
+  - id: codespell
+    types_or: [python, rst, markdown]
+    additional_dependencies: [tomli]
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.4.4
+  hooks:
+  - id: ruff
+    args: [--exit-non-zero-on-fix]
+
+- repo: https://github.com/MarcoGorelli/absolufy-imports
+  rev: v0.3.1
+  hooks:
+  - id: absolufy-imports
+    exclude: ^doc/
+
+- repo: https://github.com/PyCQA/isort
+  rev: 5.12.0
+  hooks:
+  - id: isort
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.5.0
+  hooks:
+  - id: check-ast
+  - id: check-case-conflict
+  - id: check-toml
+  - id: check-yaml
+  - id: mixed-line-ending
+    args: [--fix=auto]
+  - id: end-of-file-fixer
+    exclude: \.json$
+  - id: trailing-whitespace
+  - id: double-quote-string-fixer
+    args: [pyproject.toml]
+    exclude: \.py$
+  # - id: no-commit-to-branch
+  #   args: [--branch, master]
+
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.13.0
+  hooks:
+  - id: pretty-format-toml
+    args: [--autofix]
+  - id: pretty-format-yaml
+    args: [--autofix, --indent, '2']
+
+- repo: https://github.com/kynan/nbstripout
+  rev: 0.7.1
+  hooks:
+  - id: nbstripout
+
+- repo: local
+  hooks:
+  - id: mypy
+    name: mypy
+    entry: mypy css
+    language: system
+    pass_filenames: false
+    types: [python]
+    stages: [manual]
+
+  - id: sync-json-schema
+    name: sync-json-schema
+    description: dump pydantic models to json schema
+    entry: python scripts/sync_json_schema.py
+    language: system
+    pass_filenames: false
+    files: css/config.py

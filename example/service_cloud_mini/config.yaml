@@ -1,0 +1,171 @@
+components:
+  auto:
+    kwargs: {}
+    metrics:
+    - web2case
+    - email2case
+    - macro
+    - quicktext
+    - workflowrules
+    - workflows
+    - ltnflows
+    - bots
+    type_config_name: weightedcomponent
+    weights:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 2.0
+    - 3.0
+    - 3.0
+    - 3.0
+    - 1.0
+  consumption:
+    kwargs: {}
+    metrics:
+    - activation_rate
+    - penetration_rate
+    - engagement_rate
+    - utilization_rate
+    type_config_name: weightedcomponent
+    weights:
+    - 2.0
+    - 0.0
+    - 1.0
+    - 2.0
+  lightning:
+    kwargs: {}
+    metrics:
+    - lightning_utilization
+    type_config_name: weightedcomponent
+    weights:
+global_score:
+  kwargs: {}
+  type_config_name: weightedglobal
+  weights:
+  - 3.0
+  - 2.0
+  - 1.0
+metrics:
+  activation_rate:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmgamma
+  bots:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  email2case:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  engagement_rate:
+    kwargs:
+      floc: 0
+      fscale: 1
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  lightning_utilization:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmgamma
+  ltnflows:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  macro:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  penetration_rate:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmgamma
+  quicktext:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  utilization_rate:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  web2case:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  workflowrules:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+  workflows:
+    kwargs:
+      floc: 0
+      n_neighbors: 1000
+      param_estimator: nearestneighbors
+      peer_dims:
+      - acct_age
+      - acct_size
+    type_config_name: ipmbeta
+scoring_scale:
+  kwargs:
+    min_incr: 1
+  type_config_name: outof10
