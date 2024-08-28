@@ -8,7 +8,7 @@ authors = [
 ]
 classifiers = [
   'Development Status :: 4 - Beta',
-  'Operating System :: Linux/Max',
+  'Operating System :: Unix',
   'Programming Language :: Python',
   'Programming Language :: Python :: 3',
   'Programming Language :: Python :: 3.10',
