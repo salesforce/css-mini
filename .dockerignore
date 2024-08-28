@@ -1,0 +1,11 @@
+.venv
+__pycache__
+*.pyc
+.mypy_cache
+.pytest_cache
+.ipynb_checkpoints
+.tox
+*.egg-info
+.coverage
+reports
+.ruff_cache

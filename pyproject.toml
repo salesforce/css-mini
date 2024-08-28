@@ -1,0 +1,173 @@
+[build-system]
+build-backend = 'setuptools.build_meta'
+requires = ['setuptools>=40.8.0', 'wheel', 'setuptools_scm[toml]>=6.0']
+
+[project]
+authors = [
+  {name = 'Collin Cunningham', email = 'collin.cunningham@salesforce.com'}
+]
+classifiers = [
+  'Development Status :: 4 - Beta',
+  'Operating System :: Linux/Max',
+  'Programming Language :: Python',
+  'Programming Language :: Python :: 3',
+  'Programming Language :: Python :: 3.10',
+  'Programming Language :: Python :: 3.11',
+  'Programming Language :: Python :: 3.12'
+]
+dependencies = [
+  'numpy',
+  'pandas',
+  'pydantic',
+  'scipy',
+  'scikit-learn',
+  'PyYAML'
+]
+description = 'Customer Success Scorecard'
+dynamic = [
+  'version'
+]
+license = {file = 'LICENSE.txt'}
+name = 'css-mini'
+readme = 'README.md'
+requires-python = '>=3.10'
+
+[project.optional-dependencies]
+deploy = [
+  'boto3',
+  'sagemaker',
+  'sagemaker-training',
+  'flask'
+]
+dev = [
+  'build',
+  'pre-commit',
+  'pytest',
+  'pytest-cov',
+  'mypy',
+  'types-PyYAML',
+  'pytest-cov',
+  'pytest-html',
+  'pytest-xdist'
+]
+
+[project.scripts]
+serve = "css.serving.app:start_server"
+
+[tool.black]
+exclude = '''
+(
+    asv_bench/env
+  | \.egg
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.nox
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | setup.py
+)
+'''
+target-version = ['py310']
+
+[tool.coverage.report]
+exclude_lines = [
+  # Have to re-enable the standard pragma
+  'pragma: no cover',
+  'def __repr__',
+  'if __name__ == .__main__.:',
+  'if TYPE_CHECKING:'
+]
+ignore_errors = false
+omit = ['css/_version.py']
+show_missing = true
+
+[tool.coverage.run]
+branch = true
+omit = ['css/_version.py']
+source = ['css']
+
+[tool.isort]
+combine_as_imports = true
+force_grid_wrap = 3
+force_sort_within_sections = true
+profile = 'black'
+
+[tool.mypy]
+ignore_missing_imports = true
+plugins = [
+  'pydantic.mypy',
+  "numpy.typing.mypy_plugin"
+]
+
+[tool.ruff]
+fix = true
+line-length = 88
+target-version = 'py310'
+lint.ignore = [
+  # do not assign a lambda expression, use a def
+  'E731',
+  # controversial
+  'B006',
+  'B007',
+  'B008',
+  # setattr is used to side-step mypy
+  'B009',
+  # getattr is used to side-step mypy
+  'B010',
+  # false positives
+  'B019',
+  # Too many arguments to function call
+  'PLR0913',
+  # Too many returns
+  'PLR0911',
+  # Too many branches
+  'PLR0912',
+  # Too many statements
+  'PLR0915',
+  # Redefined loop name
+  'PLW2901',
+  # Self
+  'PYI019',
+  # Docstrings should not be included in stubs
+  'PYI021',
+  # Use typing_extensions.TypeAlias for type aliases
+  'PYI026',
+  # while int | float can be shortened to float, the former is more explicit
+  'PYI041',  # not yet implemented
+  # Magic number
+  'PLR2004'
+]
+lint.select = [
+  'F',
+  'E',
+  'W',
+  'YTT',
+  'B',
+  'Q',
+  'T10',
+  'INT',
+  'PLC',
+  'PLE',
+  'PLR',
+  'PLW',
+  'PIE',
+  'PYI',
+  'TID',
+  'ISC',
+  'TCH',
+  'C4',
+  'RUF',
+  'S102'
+]
+
+[tool.setuptools.packages.find]
+include = ['css', 'css.*']
+
+[tool.setuptools_scm]
+fallback_version = '0.1.0'
+write_to = 'css/_version.py'
