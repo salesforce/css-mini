@@ -3,6 +3,9 @@
 </picture>
 
 -----------------
+![PyPI version](https://img.shields.io/pypi/v/css-mini.svg)
+![Python versions](https://img.shields.io/pypi/pyversions/css-mini.svg)
+
 
 # Customer Success Scorecard (CSS) Mini
 
