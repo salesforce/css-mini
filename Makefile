@@ -20,5 +20,10 @@ develop: prerequisites
 lint:
 	pre-commit run --all-files --hook-stage manual
 
+package: prerequisites
+	$(RM) dist/
+	$(PIP_UPGRADE) build
+	pyproject-build --no-isolation
+
 test:
 	tox --recreate
