@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import argparse
 import sys
 from typing import Sequence
@@ -28,9 +29,7 @@ class CopyrightHeader:
 
 
 def check_missing_copyright_header(
-    header: CopyrightHeader,
-    content: str,
-    path: str
+    header: CopyrightHeader, content: str, path: str
 ) -> bool:
     lines = content.splitlines()
     if len(lines) < 2:
@@ -41,7 +40,6 @@ def check_missing_copyright_header(
         print(f"Malformed header in {path}")
         sys.exit(1)
     return True
-
 
 
 def main(argv: Sequence[str] | None = None) -> None:
@@ -63,7 +61,6 @@ def main(argv: Sequence[str] | None = None) -> None:
             else:
                 print(f"Missing header in {path}")
                 sys.exit(1)
-
 
 
 if __name__ == "__main__":
