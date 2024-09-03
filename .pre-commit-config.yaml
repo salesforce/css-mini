@@ -83,3 +83,12 @@ repos:
     language: system
     pass_filenames: false
     files: css/config.py
+
+  - id: add-copyright-header
+    name: add-copyright-header
+    description: make sure copyright is on all python files
+    entry: python scripts/add_copyright_header.py
+    language: system
+    types: [python]
+    files: ^css/
+    args: [--replace]
