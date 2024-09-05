@@ -3,10 +3,11 @@ name: Deploy package to PyPI
 on:
   push:
     branches:
-      - main
-      - master
-    tags:
-      - 'v*.*.*'
+      # - main
+      # - master
+      - PyPI_workflow_dev
+    # tags:
+    #   - 'v*.*.*'
 
 jobs:
   build-and-deploy:
@@ -39,4 +40,4 @@ jobs:
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@v2
       with:
-        password: ${{ secrets.PYPI_TOKEN }}
+        password: ${{ secrets.PYPI_TEST_TOKEN }}
