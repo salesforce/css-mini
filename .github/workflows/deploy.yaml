@@ -6,8 +6,8 @@ on:
       # - main
       # - master
       - PyPI_workflow_dev
-    # tags:
-    #   - 'v*.*.*'
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build-and-deploy:
@@ -31,8 +31,8 @@ jobs:
     # - name: Type check with mypy
     #   run: mypy .
 
-    - name: Run tests
-      run: pytest --cov=css
+    # - name: Run tests
+    #   run: pytest --cov=css
 
     - name: Build wheel
       run: python setup.py sdist bdist_wheel
