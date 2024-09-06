@@ -2,12 +2,10 @@ name: Deploy package to PyPI
 
 on:
   push:
-    branches:
-      # - main
-      # - master
-      - PyPI_workflow_dev
     tags:
       - 'v*.*.*'
+  branches:
+    - PyPI_workflow_dev
 
 jobs:
   build-and-deploy:
@@ -16,7 +14,7 @@ jobs:
     steps:
     - name: Install Git
       run: sudo apt-get install git
-      
+
     - name: Checkout code
       uses: actions/checkout@v3
       with:
