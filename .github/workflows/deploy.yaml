@@ -4,11 +4,10 @@ on:
   push:
     tags:
       - 'v*.*.*'
-  branches:
-    - PyPI_workflow_dev
 
 jobs:
   build-and-deploy:
+    if: github.ref == 'refs/heads/PyPI_workflow_dev'
     runs-on: ubuntu-latest
 
     steps:
