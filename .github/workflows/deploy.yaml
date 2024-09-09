@@ -1,14 +1,16 @@
 name: Deploy package to PyPI
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  release:
+    types: [published]
+  # push:
+  #   tags:
+  #     - 'v*.*.*'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
+    if: github.event.release.target_commitish == 'master'
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
