@@ -7,7 +7,6 @@ on:
 
 jobs:
   build-and-deploy:
-    if: startsWith(github.ref, 'refs/tags/') && github.event.ref_type == 'tag' && github.base_ref == 'refs/heads/PyPI_workflow_dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +24,7 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: pip install --upgrade setuptools wheel pytest flake8 black mypy ruff
+      run: pip install --upgrade setuptools wheel pytest flake8 black mypy ruff setuptools_scm
 
     # - name: Lint with ruff
     #   run: ruff check .
