@@ -25,13 +25,13 @@ jobs:
       run: pip install --upgrade setuptools wheel pytest flake8 black mypy ruff setuptools_scm
 
     # - name: Lint with ruff
-    #   run: ruff check . .
+    #   run: ruff check .
 
     # - name: Type check with mypy
     #   run: mypy .
 
-    # - name: Run tests
-    #   run: pytest --cov=css
+    - name: Run tests
+      run: pytest --cov=css
 
     - name: Build wheel
       run: python setup.py sdist bdist_wheel
