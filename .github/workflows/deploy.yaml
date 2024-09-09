@@ -10,7 +10,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event.release.target_commitish == 'master'
+    if: github.event.release.target_commitish == 'PyPI_workflow_dev'
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
