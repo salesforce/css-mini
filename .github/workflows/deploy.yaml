@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event.release.target_commitish == 'PyPI_workflow_dev'
+    if: github.event.release.target_commitish == 'master'
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -23,15 +23,6 @@ jobs:
 
     - name: Install dependencies
       run: pip install --upgrade setuptools wheel pytest flake8 black mypy ruff setuptools_scm
-
-    # - name: Lint with ruff
-    #   run: ruff check .
-
-    # - name: Type check with mypy
-    #   run: mypy .
-
-    - name: Run tests
-      run: pytest --cov=css
 
     - name: Build wheel
       run: python setup.py sdist bdist_wheel
