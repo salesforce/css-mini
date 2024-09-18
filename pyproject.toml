@@ -169,5 +169,6 @@ lint.select = [
 include = ['css', 'css.*']
 
 [tool.setuptools_scm]
+tag_regex = "^v(.*?)$"
 fallback_version = '0.1.0'
 write_to = 'css/_version.py'
